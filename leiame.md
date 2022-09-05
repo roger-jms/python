@@ -2,3 +2,6 @@
 
 > Status: Estudando python
 
+'''
+python calculadora.py
+'''
