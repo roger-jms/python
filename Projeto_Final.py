@@ -30,7 +30,6 @@ OBITOS = 1
 RECUPERADOS = 2
 ATIVOS = 3
 DATA = 4
-final_data[i][DATA] = final_data[i][DATA][:10]
 
 # realizando a limpeza da data, deixando apenas o dia
 for i in range(1, len(final_data)):
@@ -71,7 +70,7 @@ def get_datasets(y, labels):
                 'data': y
             }
         ]
-​
+
 # função para definição do título do gráfico
 def set_title(title = ''):
     if title != '':
@@ -82,7 +81,7 @@ def set_title(title = ''):
         'title': title,
         'display': display
     }
-​
+
 # função que cria o dicionário que representa o gráfico
 # recebe as informações solicitadas na API
 def create_chart(x, y, labels, kind='bar', title=''):
@@ -98,19 +97,19 @@ def create_chart(x, y, labels, kind='bar', title=''):
         'options': options
     }
     return chart
-f'{url_base}?c={str(chart)}'
+
 # função para realizar a requisição na API usando o dicionário create_chart
 # recebendo um valor binário. Usamos o content para armazenar o valor binário
 def get_api_chart(chart):
     url_base = 'https://quickchart.io/chart'
     resp = r.get(f'{url_base}?c={str(chart)}')
     return resp.content
-conteudo
+
 # função para salvar a imagem recebida em binário
 def save_image(path, conteudo):
     with open(path, 'wb') as imagem: # w=escrita e b=binario
         imagem.write(conteudo)
-.open
+
 # função para mostar a imagem do gráfico aqui no notebook
 from PIL import Image
 from IPython.display import display
@@ -118,18 +117,18 @@ def mostrar_imagem(path):
     img_pil = Image.open(path)
     display(img_pil)
 # programa para criar os dados e gerar o gráfico
-​
+
 #dados de y
 y_data_1 = []
 for obs in final_data[1::100]: #informações a cada 100 dias
     y_data_1.append(obs[CONFIRMADOS])
-​
+
 y_data_2 = []
 for obs in final_data[1::100]: #informações a cada 100 dias
     y_data_2.append(obs[RECUPERADOS])
     
 labels = ['Confirmados', 'Recuperados']
-​
+
 x = []
 for obs in final_data[1::100]: #informações a cada 100 dias
     x.append(obs[DATA].strftime('%d/%m/%Y'))
